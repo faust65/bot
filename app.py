@@ -50,10 +50,10 @@ def cd1():
     pp1=pk[p1]+pk[p11]
     pp2=pk[p2]+pk[p22]
     if(pp1==21 or pp2==21):
-        if(pp1=21):
+        if(pp1==21):
             p="플레이어"
-        elif(pp2=21):
-            p="딜"
+        elif(pp2==21):
+            p="딜러"
         return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}', 'message3':p+" 블랙잭"})    
     return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}'})
 
@@ -62,14 +62,32 @@ def hit1():
     global pp1
     p1=random.choice(list(pk.keys()))
     pp1+=pk[p1]
-    return jsonify({'message':f'{pp1}<br><br>{p1}'})
+
+    if(pp1>21):
+        bust="플레이어 버스트"
+
+    return jsonify({'message':f'{pp1}<br><br>{p1}', 'bust':bust})
 
 @app.route('/hit2', methods=['POST'])
 def hit2():
     global pp2
     p2=random.choice(list(pk.keys()))
     pp2+=pk[p2]
-    return jsonify({'message':f'{pp2}<br><br>{p2}'})
+
+    if(pp2>21):
+        bust="딜러 버스트"
+
+    return jsonify({'message':f'{pp2}<br><br>{p2}', 'bust':bust})
+
+@app.route('/st1', methods=['POST'])
+def st1():
+    global pp1, pp2 
+    return jsonify({'sc1':pp1})
+
+@app.route('/st2', methods=['POST'])
+def st2():
+    global pp1, pp2
+    return jsonify({'sc2':pp2})
 
 if __name__ == '__main__':
     app.run()

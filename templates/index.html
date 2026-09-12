@@ -72,6 +72,10 @@
     </div>
 
     <script>
+        let tt1=0
+        let tt2=0
+        let sc1, sc2=0
+
         function rl(){
             fetch('/rl',{method:'POST'})
             .then(response => response.json())
@@ -91,6 +95,10 @@
             document.querySelector('.d1').disabled=false;
             document.querySelector('.p2').style.color='#000'
             document.querySelector('.d2').disabled=false;
+            tt1=0
+            tt2=0
+            sc1=0
+            sc2=0
 
             fetch('/cd1',{method:'POST'})
             .then(response => response.json())
@@ -105,25 +113,57 @@
         function st1(){
             document.querySelector('.p1').style.color='#f00'
             document.querySelector('.d1').disabled=true;
+            tt1=1;
+
+            fetch('/st1', {method:'POST'})
+            .then(response => response.json())
+            .then(data => {sc1=data.sc1;})
+
+            if(tt1==1 && tt2==1){
+                gg();
+            }
         }
 
         function hit1(){
             fetch('/hit1',{method:'POST'})
             .then(response => response.json())
-            .then(data => {document.querySelector('.p1').innerHTML=data.message})
+            .then(data => {
+                document.querySelector('.p1').innerHTML=data.message;
+                document.querySelector('.re').innerText=data.bust;
+            })
             .catch(error => {document.querySelector('.p1').innerHTML="오류"+error;})
         }
 
         function st2(){
             document.querySelector('.p2').style.color='#f00';
             document.querySelector('.d2').disabled=true;
+            tt2=1
+
+            fetch('/st2', {method:'POST'})
+            .then(response => response.json())
+            .then(data => {sc2=data.sc2;})
+
+            if(tt1==1 && tt2==1){
+                gg();
+            }
         }
 
         function hit2(){
             fetch('/hit2',{method:'POST'})
             .then(response => response.json())
-            .then(data => {document.querySelector('.p2').innerHTML=data.message})
+            .then(data => {
+                document.querySelector('.p2').innerHTML=data.message;
+                document.querySelector('.re').innerText=data.bust;
+            })
             .catch(error => {document.querySelector('.p2').innerHTML="오류"+error;})
+        }
+
+        function gg() {
+            if(sc1<sc2){
+                document.querySelector('.re').innerText="딜러 승"
+            } else if(sc1>sc2){
+                document.querySelector('.re').innerText="플레이어 승"
+            }
         }
     </script>
 </body>
