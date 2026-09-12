@@ -49,6 +49,12 @@ def cd1():
     p22=random.choice(list(pk.keys()))
     pp1=pk[p1]+pk[p11]
     pp2=pk[p2]+pk[p22]
+    if(pp1==21 or pp2==21):
+        if(pp1=21):
+            p="플레이어"
+        elif(pp2=21):
+            p="딜"
+        return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}', 'message3':p+" 블랙잭"})    
     return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}'})
 
 @app.route('/hit1', methods=['POST'])

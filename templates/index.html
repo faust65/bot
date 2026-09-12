@@ -97,6 +97,7 @@
             .then(data => {
                 document.querySelector('.p1').innerHTML=data.message;
                 document.querySelector('.p2').innerHTML=data.message2;
+                document.querySelector('.re').innerText=data.message3;
             })
             .catch(error => {document.querySelector('.re').innerText="오류"+error;})
         }
