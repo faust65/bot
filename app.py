@@ -55,13 +55,15 @@ def cd1():
         elif(pp2==21):
             p="딜러"
         return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}', 'message3':p+" 블랙잭"})    
-    return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}'})
+    return jsonify({'message':f'{pp1}<br><br>{p1}<br>{p11}','message2': f'{pp2}<br><br>{p2}<br>{p22}','message3':" "})
 
 @app.route('/hit1', methods=['POST'])
 def hit1():
     global pp1
     p1=random.choice(list(pk.keys()))
     pp1+=pk[p1]
+
+    bust=" "
 
     if(pp1>21):
         bust="플레이어 버스트"
@@ -73,6 +75,8 @@ def hit2():
     global pp2
     p2=random.choice(list(pk.keys()))
     pp2+=pk[p2]
+
+    bust=" "
 
     if(pp2>21):
         bust="딜러 버스트"
