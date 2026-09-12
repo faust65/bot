@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>멸망기행</title>
+    <style>
+        body{
+            display: flex;
+        }
+
+        .ll{
+            margin-left: 20px;
+            margin-top: 50px;
+            margin-right: 60px;
+        }
+
+        .ll2{
+            margin-top: 50px;
+        }
+
+        button{
+            width: 100px;
+            height: 50px;
+        }
+
+        .p1{
+            width: 200px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+
+        .p2{
+            width: 200px;
+            height: 300px;
+            border: 1px solid #000;
+        }
+
+        .osi{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cd1{
+            margin-left: 155px;
+        }
+    </style>
+</head>
+<body>
+    <div class="ll">
+        <div class="bt">
+            <button onclick="rl()">룰렛</button>
+            <button onclick="dice()">주사위</button>
+        </div>
+        <h2 class="re"></h2>
+    </div>
+    <div class="ll2">
+        <button class="cd1" onclick="cd1()">카드 배분</button>
+        <div class="osi">
+            <div class="hl">
+                <h2 class="p1"></h2>
+                <button onclick="st1()">스테이</button>
+                <button onclick="hit1()">히트</button>
+            </div>
+            <div class="hp">
+                <h2 class="p2"></h2>
+                <button onclick="st2()">스테이</button>
+                <button onclick="hit2()">히트</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function rl(){
+            fetch('/rl',{method:'POST'})
+            .then(response => response.json())
+            .then(data => {document.querySelector('.re').innerText=data.message})
+            .catch(error => {document.querySelector('.re').innerText="오류"+error;})
+        }
+
+        function dice(){
+            fetch('/dice',{method:'POST'})
+            .then(response => response.json())
+            .then(data => {document.querySelector('.re').innerText=data.message})
+            .catch(error => {document.querySelector('.re').innerText="오류"+error;})
+        }
+
+        function cd1(){
+            fetch('/cd1',{method:'POST'})
+            .then(response => response.json())
+            .then(data => {
+                document.querySelector('.p1').innerHTML=data.message;
+                document.querySelector('.p2').innerHTML=data.message2;
+            })
+            .catch(error => {document.querySelector('.re').innerText="오류"+error;})
+        }
+
+        function st1(){
+            document.querySelector('.p1').style.color='#f00'
+        }
+
+        function hit1(){
+            fetch('/hit1',{method:'POST'})
+            .then(response => response.json())
+            .then(data => {document.querySelector('.p1').innerHTML=data.message})
+            .catch(error => {document.querySelector('.p1').innerHTML="오류"+error;})
+        }
+
+        function st2(){
+            document.querySelector('.p2').style.color='#f00'
+        }
+
+        function hit2(){
+            fetch('/hit2',{method:'POST'})
+            .then(response => response.json())
+            .then(data => {document.querySelector('.p2').innerHTML=data.message})
+            .catch(error => {document.querySelector('.p2').innerHTML="오류"+error;})
+        }
+    </script>
+</body>
+</html>
