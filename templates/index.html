@@ -159,9 +159,9 @@
         }
 
         function gg() {
-            if((sc1<sc2 && sc1<=21) || sc2>21){
+            if((sc1<sc2 && sc2<=21) || sc1>21){
                 document.querySelector('.re').innerText="딜러 승"
-            } else if((sc1>sc2 && sc2<=21) || sc1>21){
+            } else if((sc1>sc2 && sc1<=21) || sc2>21){
                 document.querySelector('.re').innerText="플레이어 승"
             }else{
                 document.querySelector('.re').innerText="무승부"
