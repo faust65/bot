@@ -61,12 +61,12 @@
             <div class="hl">
                 <h2 class="p1"></h2>
                 <button onclick="st1()">스테이</button>
-                <button onclick="hit1()">히트</button>
+                <button class="d1" onclick="hit1()">히트</button>
             </div>
             <div class="hp">
                 <h2 class="p2"></h2>
                 <button onclick="st2()">스테이</button>
-                <button onclick="hit2()">히트</button>
+                <button class="d2" onclick="hit2()">히트</button>
             </div>
         </div>
     </div>
@@ -87,6 +87,11 @@
         }
 
         function cd1(){
+            document.querySelector('.p1').style.color='#000'
+            document.querySelector('.d1').disabled=false;
+            document.querySelector('.p2').style.color='#000'
+            document.querySelector('.d2').disabled=false;
+
             fetch('/cd1',{method:'POST'})
             .then(response => response.json())
             .then(data => {
@@ -98,6 +103,7 @@
 
         function st1(){
             document.querySelector('.p1').style.color='#f00'
+            document.querySelector('.d1').disabled=true;
         }
 
         function hit1(){
@@ -108,7 +114,8 @@
         }
 
         function st2(){
-            document.querySelector('.p2').style.color='#f00'
+            document.querySelector('.p2').style.color='#f00';
+            document.querySelector('.d2').disabled=true;
         }
 
         function hit2(){
