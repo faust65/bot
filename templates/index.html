@@ -117,11 +117,11 @@
 
             fetch('/st1', {method:'POST'})
             .then(response => response.json())
-            .then(data => {sc1=data.sc1;})
-
-            if(tt1==1 && tt2==1){
-                gg();
-            }
+            .then(data => {sc1=data.sc1;
+                if(tt1==1 && tt2==1){
+                    gg();
+                }
+            })
         }
 
         function hit1(){
@@ -141,11 +141,11 @@
 
             fetch('/st2', {method:'POST'})
             .then(response => response.json())
-            .then(data => {sc2=data.sc2;})
-
-            if(tt1==1 && tt2==1){
-                gg();
-            }
+            .then(data => {sc2=data.sc2;
+                if(tt1==1 && tt2==1){
+                    gg();
+                }
+            })
         }
 
         function hit2(){
@@ -163,6 +163,8 @@
                 document.querySelector('.re').innerText="딜러 승"
             } else if(sc1>sc2){
                 document.querySelector('.re').innerText="플레이어 승"
+            }else{
+                document.querySelector('.re').innerText="무승부"
             }
         }
     </script>
